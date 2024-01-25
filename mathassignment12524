@@ -1,0 +1,9 @@
+#Using variables to solve the area of a rectangle
+
+length = 5
+
+width = 5
+
+area = length * width
+
+print("\n\n\n\n\nThe area of a rectangle that has a length of",length, "and a width of",width, "is", area,"\n\n\n\n\n\n\n")
