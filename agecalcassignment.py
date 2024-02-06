@@ -13,7 +13,8 @@ if age >= 21: print(f"You are old enough to purchase alcohol at {age}, legal age
 else: print(f"You are not old enough to purchase alcohol at {age}, legal age: 21")
 
 if age >= 55: print(f"You are old enough for the senior discount at various locations at {age}.")
-else: print(f"You are generally not old enough to the senior discount at {age}.")
+else: print(f"You are not old enough for the senior discount at {age}.")
     
 if age >= 99 and age < 116: print(f"\nSidenote: If you are over {age} years of age, you are probably dead. If you aren't then congratulations on your good life choices.")
 if age >= 116: print(f"\nSidenote: If you are over {age} years of age then you are older than the oldest recorded human to ever live and are a probably an eldrich entity, in which case you probably are not subject to human laws.")
+if age < 0: print(f"\nYou do not have a legal age, you do not exist. You will be born in {age * -1} years, in which you still will not be legally old enough for anything on this list.")
