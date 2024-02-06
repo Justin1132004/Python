@@ -33,6 +33,7 @@ clothcostp = int(clothcost / budget * 100)
 
 total = int((housingcost + utilcost + grocost + transcost + healthcost + personcost + clothcost) / budget * 100) # Get the total percentage put together
 
+#Give the user a rundown of their choices.
 print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
 print(f"your total budget was {budget}")
 print(f"{housingcostp} percent of which was spent on rent.", end='\n')
