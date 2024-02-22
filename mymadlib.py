@@ -1,4 +1,5 @@
-def madlibs()
-    
+def madlibs():
+    print("Stopbeingred")
+
 
 madlibs()
