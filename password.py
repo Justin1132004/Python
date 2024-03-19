@@ -57,6 +57,9 @@ def main():
         if hassymbol == False:
                 print("Password must contain at least one symbol from the set: !@#$%&*.")
 
+    if valid == True: #Yay, the password went through all checks and is valid!
+            print("Password accepted")
+
 
 
 main()
