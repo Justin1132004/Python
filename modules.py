@@ -1,33 +1,42 @@
+import math
+import random
+
 def main():
 
-    import math
-    import random
+    try:
 
+        
 
-    user_input = int(input("Please enter a number: "))
+        user_input = int(input("Please guess a number between 1 and 100: "))
 
-    randomnum = random.randrange(0,100)
-    
-    inputdif = abs(user_input - randomnum)
+        randomnum = random.randrange(0,100) #Random number generated between 0 and 100
+        
+        inputdif = abs(user_input - randomnum) #Get the difference between the user's input and the chosen number
 
-    inputdif = int(input("Please enter exact number: ")) #Just take my inputs now for debugging purposes
+        while user_input != randomnum: #Keep looping until the user gets the number that the program is thinking of
 
-    while inputdif <= 5 and inputdif < 15:
-        print("Very Hot")
-        user_input = int(input("Please enter a number: "))
-        inputdif = user_input
-    while inputdif > 5 and inputdif <= 15:
-        print("Hot")
-        user_input = int(input("Please enter a number: "))
-        inputdif = user_input
-    while inputdif > 15 and inputdif <= 25:
-        print("Cool")
-        user_input = int(input("Please enter a number: "))
-        inputdif = user_input
-    while inputdif > 25:
-        print("Cold")
-        user_input = int(input("Please enter a number: "))
-        inputdif = user_input
+            if inputdif <= 5 and inputdif < 15: #If the distance is between these values, tell the user how close they are.
+                print("Very Hot")
+                user_input = int(input("Please guess a number between 1 and 100: "))
+                inputdif = abs(user_input - randomnum)
+            if inputdif > 5 and inputdif <= 15:
+                print("Hot")
+                user_input = int(input("Please guess a number between 1 and 100: "))
+                inputdif = abs(user_input - randomnum)
+            if inputdif > 15 and inputdif <= 25:
+                print("Cool")
+                user_input = int(input("Please guess a number between 1 and 100: "))
+                inputdif = abs(user_input - randomnum)
+            if inputdif > 25:
+                print("Cold")
+                user_input = int(input("Please guess a number between 1 and 100: "))
+                inputdif = abs(user_input - randomnum)
+
+        print(f"You got it! The number was {randomnum}")
+
+    except ValueError: #Catch invalid user input
+        print("That is not a valid number.")
+        main()
 
 
 
