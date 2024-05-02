@@ -27,37 +27,95 @@ def check():
     #If list exists then return list
     print("Checking the system...")
     try:
-        file = open("customer_directory.txt", "r")
-        customer = file.readlines()
+        file = open("customer_directory", "r")
+        curcustomer = file.readlines()
         file.close()
-    except FileNotFoundError:
+        return curcustomer
+    except FileNotFoundError as e:
         print("List does not exist, creating..")
-        customer = []
-        return customer
+        curcustomer = []
+        return curcustomer
     except Exception as e:
         print(f"Something went horribly wrong: {e}")
 
 def read():
+    #Call Search
     print("Reading an entry...")
 
+    found_customer,found_index = search()
+
+    print(f"System Found Customer: {found_customer} at index {found_index}")
+
+def search():
+    #Called by read, update, delete
+    #Returns record, index
+    try:
+        customers = check()
+
+        recordtosearchfor = input("Please enter a name or part of a name to look for: ")
+        for cust in customers:
+            if recordtosearchfor in cust:
+                customer_index = customers.index(cust)
+                return cust, customer_index
+        else:
+                print("Entry does not exist")
+        
+    except Exception as e:
+        print(f"Something went horribly wrong searching when searching the entry: {e}")
+
 def update():
-    print("Updating an entry...")
+    try:
+        found_customer,found_index = search() #Call search function to find a customer's information
+        customerlist = found_customer.split(", ")
+        firstname = customerlist[0]
+        lastname = customerlist[1]
+        phone = customerlist[2]
+        email = customerlist[3]
+        print(f"1. First Name: {firstname} \n2. Last Name: {lastname} \n3. Phone Number: {phone} \n4. Email: {email}") #List off the current customer's current entrys
+        choice = input("Please enter the number of the entry you want to change: ") #Give user choice on which aspect of the customer's entry to change.
+        if choice == "1":
+            firstname = input("Please enter new first name: ")
+        elif choice == "2":
+            lastname = input("Please enter new last name: ")
+        elif choice == "3":
+            phone = input("Please enter new phone number: ")
+        elif choice == "4":
+            email = input("Please enter new email: ")
+        entry = ("\n" + firstname + ", " + lastname +  ", " + phone +  ", " + email + "\n") #Create new entry based on user input
+        print(entry)
+        customer = check()
+        del customer[found_index]
+        customer.append(entry) #Add new entry to direectory
+        save(customer)
+
+        print("Updating an entry...")
+    except Exception as e:
+        print(f"Something went horribly when when updating entry: {e}")
 
 def delete():
-    print("Deleting an entry...")
+    try:
+
+        found_customer,found_index = search()
+        customer = check()
+        del customer[found_index]
+
+
+
+    except Exception as e:
+        print("Something went horribly wrong when deleting entry: {e}")
     
 def create():
     #create new entity
     #call save
     try:
-        customer = check()
+        customer = check() #Call check function to make sure the customer_directory file exists before a new entry is made.
         print("\n Please enter the customer information")
         firstname = input("First Name: ")
         lastname = input("Last Name: ")
         phone = input("Phone Number: ")
         email = input("Email: ")
-        entry = {f"{firstname}, {lastname}, {phone}, {email}"}
-        customer.append(entry)
+        entry = (firstname + ", " + lastname +  ", " + phone +  ", " + email + "\n")
+        customer.append(entry) #Append the user inputted entries to the customer list
         for line in customer:
             print(line)
         save(customer)
@@ -65,10 +123,10 @@ def create():
         print(f"Something went horribly wrong: {e}")
     main()
 
-def save(output):
+def save(curcustomer):
     try:
         file = open("customer_directory", "w") #Open to customer_directory
-        for line in output: #For every line that is in the customer defined in create() write that line to the file
+        for line in curcustomer: #For every line that is in the customer defined in create() write that line to the file
             file.write(line)
         file.close()
         print("File saved!")
@@ -78,17 +136,17 @@ def save(output):
 
 def main():
     choice = main_menu()
-    try:
+    try: #User chooses from 1-4, exit the program if anything else is given.
         if choice == 1:
             create()
         elif choice == 2:
-            print("a")
+            read()
         elif choice == 3:
-            print("a1")
+            update()
         elif choice == 4:
-            print("a2")
+            delete()
         else:
-            print("Thank-a you so much for to playing my game") 
+            print("Exiting Program..") 
     except Exception as e:
         print(f"Something went wrong: {e}")
 
