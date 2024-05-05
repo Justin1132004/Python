@@ -95,14 +95,23 @@ def update():
 def delete():
     try:
 
-        found_customer,found_index = search()
+        found_customer,found_index = search() #Search for entry to delete
         customer = check()
-        del customer[found_index]
+        confirmation = input("Are you sure you want to delete this entry? (y/n)")
+        if confirmation == "y":
+            del customer[found_index] #Delete found entry if user inputs y
+            print("Deleting an entry..")
+            save(customer)
+        else:
+            print("Deletion cancelled..") #Cancel the interaction and return to menu if anything else is inputted
 
 
 
     except Exception as e:
         print("Something went horribly wrong when deleting entry: {e}")
+
+    
+    main()
     
 def create():
     #create new entity
