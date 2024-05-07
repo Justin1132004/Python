@@ -92,6 +92,9 @@ def update():
     except Exception as e:
         print(f"Something went horribly when when updating entry: {e}")
 
+
+    main()
+
 def delete():
     try:
 
